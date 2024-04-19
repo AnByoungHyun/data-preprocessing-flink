@@ -67,7 +67,7 @@ public class StreamingJob {
         // STREAM_INITIAL_POSITION: TRIM_HORIZON: consume messages starting from first available in the Kinesis Stream
         Properties kinesisConsumerConfig = new Properties();
         kinesisConsumerConfig.put(AWSConfigConstants.AWS_REGION, applicationProperties.get("kinesis.region", DEFAULT_AWS_REGION));
-        kinesisConsumerConfig.put(STREAM_INITIAL_POSITION, "LATEST");
+        kinesisConsumerConfig.put(STREAM_INITIAL_POSITION, "TRIM_HORIZON");
 
 
         // Set up publisher type: POLLING (standard consumer) or EFO (Enhanced Fan-Out)
@@ -133,6 +133,6 @@ public class StreamingJob {
         //input.sinkTo(sink);
         statusCounts.sinkTo(sink);
 
-        env.execute("Flink Kinesis Source and Sink Version 1.1");
+        env.execute("Flink Kinesis Source and Sink Version 1.2");
     }
 }

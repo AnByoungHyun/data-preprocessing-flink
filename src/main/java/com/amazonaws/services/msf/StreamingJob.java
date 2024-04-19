@@ -105,9 +105,7 @@ public class StreamingJob {
                         String statusCode = jsonNode.get("response").asText();
                         out.collect(new Tuple2<>(statusCode, 1));
                     }
-                })
-                .keyBy(value -> value.f0)
-                .sum(1);
+                });
 
         // 상태 코드 및 카운트를 JSON 형식으로 변환
         return aggregated.map(new MapFunction<Tuple2<String, Integer>, String>() {
